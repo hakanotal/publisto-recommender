@@ -192,7 +192,7 @@ class TfidfEmbeddingVectorizer(object):
         return np.vstack([self.word_average(sent) for sent in docs])
 
 
-def get_recs(ingredients, N=5, mean=False):
+def get_recs(ingredients, N=3, mean=False):
     # load in word2vec model
     model = Word2Vec.load("models/model_cbow_f.bin")
     model.init_sims(replace=True)
