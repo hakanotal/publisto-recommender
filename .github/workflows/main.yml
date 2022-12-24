@@ -25,9 +25,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
       run: |
-        aws configure set region ${{ AWS_DEFAULT_REGION }}
-        aws configure set aws_access_key_id ${{ AWS_ACCESS_KEY_ID }}
-        aws configure set aws_secret_access_key ${{ AWS_SECRET_ACCESS_KEY }}
+        aws configure set region $AWS_DEFAULT_REGION
+        aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+        aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
         aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin 306769377260.dkr.ecr.eu-central-1.amazonaws.com
         docker build -t swe-model-container .
         docker tag swe-model-container:latest 306769377260.dkr.ecr.eu-central-1.amazonaws.com/swe-model-container:latest
