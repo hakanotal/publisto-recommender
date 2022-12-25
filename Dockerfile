@@ -1,7 +1,7 @@
 FROM python:3.9
 WORKDIR /code
-COPY ./requirements.txt /code/requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt 
-COPY ./app /code/app 
-#
-CMD ["cd","app","&&","uvicorn", "main:app", "--host", "0.0.0.0"]
+COPY requirements.txt .
+RUN CLFAGS='-g0 -Wl -I/usr/include:/usr/local/include -L/usr/lib:/usr/local/lib' pip install --no-cache-dir --global-option=build_ext --compile -r requirements.txt
+COPY . .
+RUN cd app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
