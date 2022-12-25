@@ -1,6 +1,3 @@
-import os
-import sys
-import logging
 import unidecode
 import ast
 
@@ -16,9 +13,6 @@ import config
 from src.ingredient_parser import ingredient_parser
 
 import request
-import nltk
-nltk.download('wordnet')
-nltk.download('stopwords')
 
 
 def get_and_sort_corpus(data):
@@ -246,15 +240,15 @@ def get_input():
         input_str += (item['name'] + ', ')
     return input_str
 
-def get_input_by_user_id(user_id):
-    all_items = request.get_all_items_by_user_id(user_id)
+async def get_input_by_user_id(user_id):
+    all_items = await request.get_all_items_by_user_id(user_id)
     input_str = ""
     for item in all_items:
         input_str += (item['name'] + ', ')
     return input_str
 
-def get_user_recs(user_id):
-    inp = get_input_by_user_id(user_id)
+async def get_user_recs(user_id):
+    inp = await get_input_by_user_id(user_id)
     rec = get_recs(inp)
     return rec
     
