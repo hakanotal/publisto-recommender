@@ -2,3 +2,4 @@ venv*
 model.zip
 dataentry.ipynb
 .ipynb_checkpoints
+Dockerfile
